@@ -2,30 +2,57 @@
 <html ng-app="myApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLkBREsLAiweCviLcdxvWMeCSFxVA3sKo&sensor=false">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLkBREsLAiweCviLcdxvWMeCSFxVA3sKo&sensor=false">
     </script>
 	<script src="js/main.js"></script>
+	<script src="js/colorpicker/colorpicker.js"></script>
 	<style>
 		#map-canvas{height:400px;}
 	</style>
 	<link rel="stylesheet" type="text/css" href="css/css.css" />
+	
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </head>
     <body ng-controller="journeys" class="section">
 		<div class="col span_2_of_5">
 			{{journeys.length}} segments totalling <strong>{{totalDistance()}}</strong>
 			<br/>
 			<br/>
-			<div ng-repeat="journey in journeys" id="journeys">
-				<input type="checkbox" ng-model="journey.include" text="include" /><input type="text" ng-model="journey.start" placeholder="start location"/> to 
-				<input type="text" ng-model="journey.end" placeholder="end location"/> 
-				<strong>{{journey.distance/1000}} km</strong> 
-				<button ng-click="calculateDistance($index)">calculate</button>
-				<button ng-click="deleteJourney($index)">delete</button>
-				
-				
+			<div ng-repeat="journey in journeys" id="journeys" class="container-fluid">
+				<div class="row">
+					<div class="form-group col-xs-1">
+						<input type="checkbox" ng-model="journey.include" text="include" class="form-control"/>
+					</div>
+					<div class="form-group col-xs-3">
+						<input type="text" ng-model="journey.start" placeholder="start location" class="form-control"/>
+					</div>
+					<!--<label class="form-control col-xs-1"> to </label>-->
+					<div class="form-group col-xs-3">
+						<input type="text" ng-model="journey.end" placeholder="end location" class="form-control"/> 
+					</div>
+					<div class="form-group col-xs-2">
+						<strong class="">{{journey.distance/1000}} km</strong> 
+					</div>
+					<div class="form-group col-xs-2">
+						<button class="btn btn-default" ng-click="calculateDistance($index)">calculate</button>
+					</div>
+					<div class="form-group col-xs-1">
+						<button alt="delete" class="btn btn-default" ng-click="deleteJourney($index)"><i class="glyphicon glyphicon-trash"></i></button>
+					</div>
+					<!--<div class="form-group">
+						<input class="color" ng-model="journey.lineColour"/>
+					</div>-->
+				</div>	
 			</div>
-			<a href="#" ng-click="addJourney()">add another</a>
+			<hr/>
+				<button class="btn btn-block btn-default" ng-click="addJourney()"><i class="glyphicon glyphicon-plus"></i> add another journey</button>
+
 		</div>
 		<div id="map-canvas" class="col span_3_of_5">{{redrawMap()}}</div>
 		{{lat}},{{lon}}

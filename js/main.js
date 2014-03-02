@@ -92,11 +92,19 @@ app.controller('journeys', function($scope){
 		this.distance = "loading..";
 		this.include = true;
 		
+		this.lineColour = 'FF0000';
+		
 		//this.distance = calculateDistance();
 		
 		this.render = function(){
 			// make directions renderer for this journye
-			this.directionsRenderer = new google.maps.DirectionsRenderer({suppressInfoWindows: true, suppressMarkers: true, polylineOptions: {strokeColor: '#FF0000'}});
+			this.directionsRenderer = new google.maps.DirectionsRenderer(
+				{
+					suppressInfoWindows: true,
+					suppressMarkers: true,
+					polylineOptions: {strokeColor: '#' + this.lineColour, width:1}
+				}
+			);
 			if(this.directionsRenderer){
 				this.directionsRenderer.setMap(null);
 			}
