@@ -13,14 +13,15 @@
   </head>
     <body class="section">
 		<div ng-controller="journeys" class="col span_2_of_5">
-			{{journeys.length}} segments totalling <strong>{{totalDistance()}}</strong>, <a href="#" ng-click="addJourney()">add another</a>
+			{{journeys.length}} segments totalling <strong>{{totalDistance()}}</strong>
 			<br/>
 			<br/>
 			<div ng-repeat="journey in journeys" id="journeys">
-				{{$index + 1}} Travel from <input type="text" ng-model="journey.start" placeholder="start location"/> to 
+				<input type="checkbox" ng-model="journey.include" text="include" /><input type="text" ng-model="journey.start" placeholder="start location"/> to 
 				<input type="text" ng-model="journey.end" placeholder="end location"/> 
 				<strong>{{journey.distance/1000}} km</strong> <button ng-click="calculateDistance($index)">calculate</button>
 			</div>
+			<a href="#" ng-click="addJourney()">add another</a>
 		</div>
 		<div id="map-canvas" class="col span_3_of_5"></div>
 		
