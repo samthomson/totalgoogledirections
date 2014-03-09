@@ -3,6 +3,8 @@ totalgoogledirections
 
 angular js app to add up distances of google directions
 
+demo: http://totalgoogledirections.projects.samthomson.net/
+
 Background
 - Using google directions for long journeys across borders doesn't always work (China), however creating two journeys: one up to the border, and one from the border onwards each work.
 - getting direcitons which pass over sea include the distance over water in the total
