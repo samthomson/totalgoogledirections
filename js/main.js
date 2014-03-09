@@ -93,6 +93,8 @@ app.controller('journeys', function($scope){
 		//this.distance = calculateDistance();
 		
 		this.render = function(){
+
+			this.lineColour = (this.include) ? 'FF0000' : 'C0C0C0';
 			// make directions renderer for this journye
 			this.directionsRenderer = new google.maps.DirectionsRenderer(
 				{
@@ -105,7 +107,7 @@ app.controller('journeys', function($scope){
 				this.directionsRenderer.setMap(null);
 			}
 			this.directionsRenderer.setMap(map);
-			if(this.include && this.result){
+			if(this.result){
 				this.directionsRenderer.setDirections(this.result);
 				//this.result = null;
 			}
