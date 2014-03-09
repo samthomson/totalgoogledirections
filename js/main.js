@@ -46,7 +46,8 @@ app.controller('journeys', function($scope){
 		var iTotal = 0;
 		$scope.journeys.forEach(function(journey){
 			if(journey.include)
-				iTotal += journey.distance;
+				if(!isNaN(journey.distance))
+					iTotal += journey.distance;
 		});
 		return numberWithCommas(iTotal/1000) + " km";
 	}
@@ -58,8 +59,7 @@ app.controller('journeys', function($scope){
 		});
 		// now update the lat/lon values to map pos for the next render
 		$scope.lat = map.getCenter().lat;
-		$scope.lon = map.getCenter().lng;
-		
+		$scope.lon = map.getCenter().lng;		
 	}
 	
 	
@@ -109,8 +109,10 @@ app.controller('journeys', function($scope){
 				this.directionsRenderer.setMap(null);
 			}
 			this.directionsRenderer.setMap(map);
-			if(this.include && this.result)
+			if(this.include && this.result){
 				this.directionsRenderer.setDirections(this.result);
+				//this.result = null;
+			}
 		};
 	}
 });
