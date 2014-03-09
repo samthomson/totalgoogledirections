@@ -25,11 +25,7 @@ app.controller('journeys', function($scope){
 	$scope.lat = 41.85003;
 	$scope.lon = -87.6500523;
 
-	$scope.journeys = [
-		new Journey("copenhagen", "gedser"),
-		new Journey("rostock", "berlin"),
-		new Journey("berlin", "talinn")
-	];
+	$scope.journeys = [];
 	
     
 	$scope.addJourney = function(start, end) {
