@@ -28,8 +28,9 @@ app.controller('journeys', function($scope){
 	$scope.journeys = [];
 	
     
-	$scope.addJourney = function(start, end) {
-		$scope.journeys.push(new Journey(start, end));
+	$scope.addJourney = function() {
+		var sStart = ($scope.journeys.length > 0) ? $scope.journeys[$scope.journeys.length-1].end : "";
+		$scope.journeys.push(new Journey(sStart, ""));
 		$scope.calculateDistance($scope.journeys.length-1);
 	}
 	
