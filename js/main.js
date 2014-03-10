@@ -62,8 +62,8 @@ app.controller('journeys', function($scope){
 	
 	$scope.calculateDistance = function(index){
 		//$scope.journeys[index].distance();
-		
-		var request = {
+		if($scope.journeys[index].start != "" && $scope.journeys[index].end != ""){
+			var request = {
 				origin: $scope.journeys[index].start,
 				destination: $scope.journeys[index].end,
 				travelMode: google.maps.TravelMode.DRIVING
@@ -80,6 +80,10 @@ app.controller('journeys', function($scope){
 					return "error :(";
 				}
 			});
+		}else{
+			// inputs were invalid
+			
+		}
 	};
 
 	function Journey(start, end){
