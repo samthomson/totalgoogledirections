@@ -16,7 +16,24 @@ function initialize($scope) {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', []).
+	directive('googlePlaces', function(){
+	    return {
+	        restrict:'E',
+	        replace:true,
+	        // transclude:true,
+	        scope: {location:'='},
+	        template: '<input id="google_places_ac" name="google_places_ac" type="text" class="input-block-level"/>',
+	        link: function($scope, elm, attrs){
+	            var autocomplete = new google.maps.places.Autocomplete($("#google_places_ac")[0], {});
+	            google.maps.event.addListener(autocomplete, 'place_changed', function() {
+	                var place = autocomplete.getPlace();
+	                $scope.location = place.geometry.location.lat() + ',' + place.geometry.location.lng();
+	                $scope.$apply();
+	            });
+	        }
+	    }
+	});
 
 app.run(function($rootScope) {
 });
@@ -25,7 +42,7 @@ app.controller('journeys', function($scope){
 	$scope.lat = 41.85003;
 	$scope.lon = -87.6500523;
 
-	$scope.journeys = [];
+	$scope.journeys = [{start:"copenhagen",end:"hanoi"}];
 	
     
 	$scope.addJourney = function() {
