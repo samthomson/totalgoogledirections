@@ -74,9 +74,15 @@
 
 		</div>
 		<div id="map-canvas" class="col span_3_of_5">
-			<google-map center="map.center" zoom="map.zoom" draggable="true"></google-map>
+			<google-map center="map.center" zoom="map.zoom" draggable="true">
+				<polylines 
+					models="journeys" 
+					idKey="key"
+					path="'path'">
+				</polyline>
+			</google-map>
 		</div>
-		{{lat}},{{lon}}
+		{{zoom}}: {{lat}},{{lon}}
 		<a href="roadmap.html">road-map</a>
     </body>
 </html>
