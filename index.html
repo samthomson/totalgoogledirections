@@ -4,9 +4,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLkBREsLAiweCviLcdxvWMeCSFxVA3sKo&sensor=false">
     </script>
+	<script src="js/lodash.min.js"></script>
+	<script src="js/angular-google-maps.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/colorpicker/colorpicker.js"></script>
-	<script src="js/ngautocomp.js"></script>
 	<style>
 		#map-canvas{height:400px;}
 	</style>
@@ -33,39 +34,48 @@
     <body ng-controller="journeys" class="section">
 		<div class="col span_2_of_5">
 			{{journeys.length}} segments totalling <strong>{{totalDistance()}}</strong>
-			<br/>
-			<br/>
-			<div ng-repeat="journey in journeys" id="journeys" class="container-fluid">
-				<div class="row">
-					<div class="form-group col-xs-1">
-						<input type="checkbox" ng-model="journey.include" text="include" class="form-control"/>
+			
+
+			<div class="panel panel-default" ng-repeat="journey in journeys">
+ 				<div class="panel-body">
+
+					<div class="row">
+						<div class="form-group col-xs-6" ng-class="{'has-error': journey.start == ''}">
+							<input type="text" ng-model="journey.start" placeholder="start location" class="form-control"/>
+						</div>
+						<!--<label class="form-control col-xs-1"> to </label>-->
+						<div class="form-group col-xs-6" ng-class="{'has-error': journey.start == ''}">
+							<input type="text" ng-model="journey.end" placeholder="end location" class="form-control"/> 
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="form-group col-xs-2">
+							<input type="checkbox" ng-model="journey.include" text="include" class="form-control"/>
+						</div>
+						<div class="form-group col-xs-4">
+							<strong class="">{{journey.distance/1000}} km</strong> 
+						</div>
+						<div class="form-group col-xs-4">
+							<button class="btn btn-default" ng-click="calculateDistance($index)">calculate</button>
+						</div>
+						<div class="form-group col-xs-2">
+							<button alt="delete" class="btn btn-default" ng-click="deleteJourney($index)"><i class="glyphicon glyphicon-trash"></i></button>
+						</div>
+						<!--<div class="form-group">
+							<input class="color" ng-model="journey.lineColour"/>
+						</div>-->
+
 					</div>
-					<div class="form-group col-xs-3" ng-class="{'has-error': journey.start == ''}">
-						<input type="text" ng-model="journey.start" placeholder="start location" class="form-control"/>
-					</div>
-					<!--<label class="form-control col-xs-1"> to </label>-->
-					<div class="form-group col-xs-3" ng-class="{'has-error': journey.start == ''}">
-						<input type="text" ng-model="journey.end" placeholder="end location" class="form-control"/> 
-					</div>
-					<div class="form-group col-xs-2">
-						<strong class="">{{journey.distance/1000}} km</strong> 
-					</div>
-					<div class="form-group col-xs-2">
-						<button class="btn btn-default" ng-click="calculateDistance($index)">calculate</button>
-					</div>
-					<div class="form-group col-xs-1">
-						<button alt="delete" class="btn btn-default" ng-click="deleteJourney($index)"><i class="glyphicon glyphicon-trash"></i></button>
-					</div>
-					<!--<div class="form-group">
-						<input class="color" ng-model="journey.lineColour"/>
-					</div>-->
-				</div>	
+				</div>
 			</div>
 			<hr/>
 				<button class="btn btn-block btn-default" ng-click="addJourney()"><i class="glyphicon glyphicon-plus"></i> add another journey</button>
 
 		</div>
-		<div id="map-canvas" class="col span_3_of_5">{{redrawMap()}}</div>
+		<div id="map-canvas" class="col span_3_of_5">
+			<google-map center="map.center" zoom="map.zoom" draggable="true"></google-map>
+		</div>
 		{{lat}},{{lon}}
 		<a href="roadmap.html">road-map</a>
     </body>

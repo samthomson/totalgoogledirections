@@ -1,22 +1,7 @@
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
-var map;
 
-function initialize($scope) {
-  //directionsDisplay = new google.maps.DirectionsRenderer();
-  var chicago = new google.maps.LatLng($scope.lat, $scope.lon);
-  var mapOptions = {
-    zoom:7,
-    center: chicago
-  }
-  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  //directionsDisplay.setMap(map);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-
-var app = angular.module('myApp', []).
+var app = angular.module('myApp', ['google-maps']).
 	directive('googlePlaces', function(){
 	    return {
 	        restrict:'E',
@@ -41,6 +26,14 @@ app.run(function($rootScope) {
 app.controller('journeys', function($scope){	
 	$scope.lat = 41.85003;
 	$scope.lon = -87.6500523;
+
+	$scope.map = {
+    center: {
+        latitude: $scope.lat,
+        longitude: $scope.lon
+    },
+    zoom: 8
+};
 
 	$scope.journeys = [{start:"copenhagen",end:"hanoi"}];
 	
