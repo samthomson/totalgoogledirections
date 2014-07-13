@@ -72,7 +72,7 @@ app.controller('journeys', function($scope){
 					$scope.journeys[index].distance = result.routes[0].legs[0].distance.value;
 					//$scope.journeys[index].render();
 					// force ui to update
-					//$scope.$apply();
+					$scope.$apply();
 				}else{
 					return "error :(";
 				}
