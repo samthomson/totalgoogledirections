@@ -89,7 +89,10 @@ app.controller('journeys', function($scope){
 		this.key = guid;
 		this.start = start;
 		this.end = end;
-		this.distance = "loading..";
+		this.distance = 0;
+		this.literalDistance = function(){
+			return (this.distance == 0) ? this.distance : this.distance/1000 + " km";
+		}
 		this.include = true;
 		// array of lat lons making up route
 		this.path = [{"latitude":0,"longitude":0}];
