@@ -71,7 +71,6 @@ app.controller('journeys', function($scope){
 
 					// distance as an absolute number
 					$scope.journeys[index].distance = result.routes[0].legs[0].distance.value;
-					//$scope.journeys[index].render();
 					// force ui to update
 					$scope.$apply();
 				}else{
