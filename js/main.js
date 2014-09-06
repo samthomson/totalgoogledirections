@@ -19,7 +19,8 @@ app.controller('journeys', function($scope){
 	    zoom: $scope.zoom
 	};
 
-	$scope.journeys = [{start:"copenhagen",end:"roskilde", include: true, key: guid()}];
+	//$scope.journeys = [{start:"copenhagen",end:"roskilde", include: true, key: guid()}];
+	$scope.journeys = [];
 	
     
 	$scope.addJourney = function() {
